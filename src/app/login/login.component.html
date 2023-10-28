@@ -1,0 +1,19 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="w-100">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3">
+      <label for ="username" class="form-label">Username</label>
+      <input formControlName="myUsername" type="text" class="form-control" [ngClass]="submitted && !form.get('myUsername')?.valid?'is-invalid':''" id="username" aria-describedby="usernameDesc">
+      <div id="usernameDesc" class="form-text">Inserisci qui il tuo username.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input formControlName="myPassword" type="password" class="form-control" [ngClass]="submitted && !form.get('myPassword')?.valid?'is-invalid':''" id="password" aria-describedby="passwordDesc">
+      <div id="passwordDesc" class="form-text">Inserisci qui la tua password.</div>
+    </div>
+    <div *ngIf="isLoginFailed" class="alert alert-danger">{{errorMessage}}</div>
+    <button type="submit" class="btn btn-primary w-100">Entra</button>
+    <div style="text-align: center">Oppure <a routerLink="/signup">registrati qui</a>.</div>
+  </form>
+  </div>
+</div>

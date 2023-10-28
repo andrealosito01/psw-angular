@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'psw-angular';
+
+  constructor(private tokenService:TokenStorageService, private router:Router){ }
+
+  ngOnInit(){
+    const token = this.tokenService.getToken();
+    const user = this.tokenService.getUser();
+    console.log(user);
+    if(TokenStorageService.isValid(token,user)){
+      const roles = user.resource_access.myclient.roles;
+      if(roles.includes('paziente'))
+        this.router.navigateByUrl("/paziente");
+      else if(roles.includes('nutrizionista')){
+        this.router.navigateByUrl("/nutrizionista");
+      }
+    }else{
+      this.router.navigateByUrl("/login");
+    }
+  }
+
 }
