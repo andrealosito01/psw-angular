@@ -28,4 +28,14 @@ export class AuthService {
     return this.http.post(auth.AUTH_API,body,httpOptions);
   }
 
+  public signup(user:any):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post(auth.REG_API,user,httpOptions);
+  }
+
 }

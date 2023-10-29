@@ -14,7 +14,6 @@ export class AppComponent {
   ngOnInit(){
     const token = this.tokenService.getToken();
     const user = this.tokenService.getUser();
-    console.log(user);
     if(TokenStorageService.isValid(token,user)){
       const roles = user.resource_access.myclient.roles;
       if(roles.includes('paziente'))

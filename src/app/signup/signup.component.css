@@ -1,0 +1,13 @@
+.scrollable-form {
+  max-height: 100vh; /* Imposta un'altezza massima per il modulo */
+  overflow-y: auto; /* Abilita lo scrolling verticale se il contenuto supera l'altezza massima */
+  overflow-x: hidden;
+}
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}

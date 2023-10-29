@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { TokenStorageService } from '../services/token-storage.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,20 @@ export class LoginComponent {
   isLoginFailed = false;
   errorMessage = "";
   submitted = false;
+  signed = false;
 
-  constructor(private authService:AuthService, private tokenStorage:TokenStorageService){
+  constructor(private authService:AuthService, private tokenStorage:TokenStorageService, private route:ActivatedRoute){
     this.form = new FormGroup({
-      myUsername:new FormControl('',Validators.compose([Validators.maxLength(20),Validators.required])),
+      myUsername:new FormControl('',Validators.compose([Validators.required])),
       myPassword:new FormControl('',Validators.compose([Validators.required]))
     })
   }
 
-  ngOnInit():void{}
+  ngOnInit():void{
+    this.route.queryParams.subscribe(params => {
+      this.signed = params['signed'];
+    })
+  }
 
   onSubmit():void{
 
@@ -45,7 +51,7 @@ export class LoginComponent {
         if(err.status == 401)
           this.errorMessage = 'Credenziali errate!';
         else
-          this.errorMessage = err.message;
+          this.errorMessage = "Errore generico, contatta l'amministratore dell'app!";
         this.isLoginFailed = true;
       }
     })

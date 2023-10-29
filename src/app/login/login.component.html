@@ -1,15 +1,20 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
+<div class="container vertical-center">
   <div class="w-100">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div *ngIf="signed" class="alert alert-success">Registrazione avvenuta con successo!</div>
     <div class="mb-3">
       <label for ="username" class="form-label">Username</label>
-      <input formControlName="myUsername" type="text" class="form-control" [ngClass]="submitted && !form.get('myUsername')?.valid?'is-invalid':''" id="username" aria-describedby="usernameDesc">
-      <div id="usernameDesc" class="form-text">Inserisci qui il tuo username.</div>
+      <input formControlName="myUsername" type="text" class="form-control" [ngClass]="submitted && !form.get('myUsername')?.valid?'is-invalid':''" id="username">
+      <div *ngIf="form.get('myUsername')?.invalid" class="invalid-feedback">
+        Il campo è obbligatorio.
+      </div>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input formControlName="myPassword" type="password" class="form-control" [ngClass]="submitted && !form.get('myPassword')?.valid?'is-invalid':''" id="password" aria-describedby="passwordDesc">
-      <div id="passwordDesc" class="form-text">Inserisci qui la tua password.</div>
+      <input formControlName="myPassword" type="password" class="form-control" [ngClass]="submitted && !form.get('myPassword')?.valid?'is-invalid':''" id="password">
+      <div *ngIf="form.get('myPassword')?.invalid" class="invalid-feedback">
+        Il campo è obbligatorio.
+      </div>
     </div>
     <div *ngIf="isLoginFailed" class="alert alert-danger">{{errorMessage}}</div>
     <button type="submit" class="btn btn-primary w-100">Entra</button>

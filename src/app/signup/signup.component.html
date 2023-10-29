@@ -1,1 +1,69 @@
-<div>Torna al <a routerLink="/login">login</a>.</div>
+<div class="container vertical-center">
+  <div class="w-100">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3">
+      <label for ="username" class="form-label">Username</label>
+      <input formControlName="myUsername" type="text" class="form-control" [ngClass]="submitted && !form.get('myUsername')?.valid?'is-invalid':''" id="username">
+      <div *ngIf="form.get('myUsername')?.invalid" class="invalid-feedback">
+        La lunghezza dell'username dev'essere compresa tra i 5-20 caratteri.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for ="email" class="form-label">Email</label>
+      <input formControlName="myEmail" type="email" class="form-control" [ngClass]="submitted && !form.get('myEmail')?.valid?'is-invalid':''" id="email">
+      <div *ngIf="form.get('myEmail')?.invalid" class="invalid-feedback">
+        Email non valida.
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="nome" class="form-label">Nome</label>
+        <input formControlName="myNome" type="text" class="form-control" [ngClass]="submitted && !form.get('myNome')?.valid?'is-invalid':''" id="nome">
+        <div *ngIf="form.get('myNome')?.invalid" class="invalid-feedback">
+          La lunghezza del nome dev'essere compresa tra i 1-16 caratteri.
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="cognome" class="form-label">Cognome</label>
+        <input formControlName="myCognome" type="text" class="form-control" [ngClass]="submitted && !form.get('myCognome')?.valid?'is-invalid':''" id="cognome">
+        <div *ngIf="form.get('myCognome')?.invalid" class="invalid-feedback">
+          La lunghezza del cognome dev'essere compresa tra i 1-16 caratteri.
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="nascita" class="form-label">Data di nascita</label>
+        <input formControlName="myNascita" type="date" class="form-control" [ngClass]="submitted && !form.get('myNascita')?.valid?'is-invalid':''" id="nascita">
+        <div *ngIf="form.get('myNascita')?.invalid" class="invalid-feedback">
+          Campo obbligatorio.
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="altezza" class="form-label">Altezza</label>
+        <input formControlName="myAltezza" type="number" class="form-control" [ngClass]="submitted && !form.get('myAltezza')?.valid?'is-invalid':''" id="altezza">
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input formControlName="myPassword" type="password" class="form-control" [ngClass]="submitted && !form.get('myPassword')?.valid?'is-invalid':''" id="password">
+      <div *ngIf="form.get('myPassword')?.invalid" class="invalid-feedback">
+        La password deve contenere almeno 8 caratteri.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="rePassword" class="form-label">Ripeti password</label>
+      <input formControlName="myRePassword" type="password" class="form-control" [ngClass]="submitted && (!form.get('myRePassword')?.valid || missMatch)?'is-invalid':''" id="rePassword">
+      <div *ngIf="form.get('myRePassword')?.invalid" class="invalid-feedback">
+        La password deve contenere almeno 8 caratteri.
+      </div>
+      <div *ngIf="missMatch" class="invalid-feedback">
+        Le password non coincidono.
+      </div>
+    </div>
+    <div *ngIf="isSignUpFailed" class="alert alert-danger">{{errorMessage}}</div>
+    <button type="submit" class="btn btn-primary w-100">Registrati</button>
+    <div style="text-align: center">Torna al <a routerLink="/login">login</a>.</div>
+  </form>
+  </div>
+</div>
