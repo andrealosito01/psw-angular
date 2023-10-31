@@ -12,6 +12,10 @@ import { AuthService } from './services/auth.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { PazienteComponent } from './paziente/paziente.component';
 import { NutrizionistaComponent } from './nutrizionista/nutrizionista.component';
+import { DiarioComponent } from './diario/diario.component';
+import { PianoComponent } from './piano/piano.component';
+import { AllenamentoComponent } from './allenamento/allenamento.component';
+import { ProfiloComponent } from './profilo/profilo.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { NutrizionistaComponent } from './nutrizionista/nutrizionista.component'
     LoginComponent,
     SignupComponent,
     PazienteComponent,
-    NutrizionistaComponent
+    NutrizionistaComponent,
+    DiarioComponent,
+    PianoComponent,
+    AllenamentoComponent,
+    ProfiloComponent
   ],
   imports: [
     BrowserModule,

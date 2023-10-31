@@ -10,6 +10,12 @@ export class PazienteComponent {
 
   constructor(private tokenService:TokenStorageService){}
 
+  selected = 'dashboard';
+
+  change(scelta:string):void{
+    this.selected = scelta;
+  }
+
   logout():void{
     this.tokenService.signOut();
     window.location.reload();

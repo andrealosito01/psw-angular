@@ -1,0 +1,28 @@
+img.logo{
+  width:35px;
+}
+
+a{
+  text-decoration: none;
+}
+
+a.selected{
+  text-decoration: underline;
+}
+
+.grey-background {
+  background-color: #eeeeee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.white-content {
+  background-color: #ffffff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #bcbcbc;
+  border-right: 1px solid #bcbcbc;
+}
+
