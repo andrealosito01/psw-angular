@@ -28,6 +28,22 @@ export class AuthService {
     return this.http.post(auth.AUTH_API,body,httpOptions);
   }
 
+  public refresh(token:string):Observable<any>{
+    const body = new HttpParams()
+    .set('grant_type',auth.REFRESH_TOKEN)
+    .set('client_id',auth.CLIENT_ID)
+    .set('client_secret',auth.CLIENT_SECRET)
+    .set('refresh_token',token);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+
+    return this.http.post(auth.AUTH_API,body,httpOptions);
+  }
+
   public signup(user:any):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
@@ -35,7 +51,7 @@ export class AuthService {
       })
     };
 
-    return this.http.post(auth.REG_API,user,httpOptions);
+    return this.http.post(auth.PAZ_API,user,httpOptions);
   }
 
 }

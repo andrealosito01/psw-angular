@@ -12,9 +12,9 @@ export class AppComponent {
   constructor(private tokenService:TokenStorageService, private router:Router){ }
 
   ngOnInit(){
-    const token = this.tokenService.getToken();
     const user = this.tokenService.getUser();
-    if(TokenStorageService.isValid(token,user)){
+    console.log(user);
+    if(user){
       const roles = user.resource_access.myclient.roles;
       if(roles.includes('paziente'))
         this.router.navigateByUrl("/paziente");

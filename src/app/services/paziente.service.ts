@@ -4,12 +4,24 @@ import { Observable } from 'rxjs';
 
 import { auth } from 'config';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class PazienteService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
+  public getPaziente(username:String):Observable<any>{
+    const url = auth.PAZ_API + '/' + username;
+    console.log(url);
+    return this.http.get(url);
+  }
 
 }

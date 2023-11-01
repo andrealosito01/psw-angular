@@ -37,12 +37,10 @@ export class SignupComponent {
 
   ngOnInit():void{
     this.form.get('myPassword')?.valueChanges.subscribe(()=>{
-      console.log("password changed");
       this.missMatch = !this.checkMatching();
     })
 
     this.form.get('myRePassword')?.valueChanges.subscribe(()=>{
-      console.log("rePassword changed");
       this.missMatch = !this.checkMatching();
     })
   }

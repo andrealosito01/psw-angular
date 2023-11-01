@@ -41,9 +41,8 @@ export class LoginComponent {
 
     this.authService.login(username,password).subscribe({
       next:data=>{
-        const decodedToken = this.decodeToken(data.access_token);
         this.tokenStorage.saveToken(data.access_token);
-        this.tokenStorage.saveUser(decodedToken);
+        this.tokenStorage.saveRefreshToken(data.refresh_token);
         this.isLoginFailed = false;
         window.location.reload();
       },
@@ -55,12 +54,6 @@ export class LoginComponent {
         this.isLoginFailed = true;
       }
     })
-  }
-
-  private decodeToken(token:string):any{
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(atob(base64));
   }
 
 }

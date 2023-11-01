@@ -3,5 +3,6 @@ export const auth = {
   GRANT_TYPE: 'password',
   CLIENT_ID: 'myclient',
   CLIENT_SECRET: 'gogYIFn4vccriS9PZHLKbYFc0stFnlxH',
-  REG_API: 'http://localhost:8081/paziente'
+  PAZ_API: 'http://localhost:8081/paziente',
+  REFRESH_TOKEN: 'refresh_token'
 };
