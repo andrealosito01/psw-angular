@@ -20,15 +20,9 @@ export class ProfiloComponent {
         this.paziente = data;
       },
       error:err=>{
-        this.tokenService.refreshToken().subscribe(successo=>{
-          if(successo){
-            console.log("Refresh token usato correttamente!");
-            this.ngOnInit();
-          }else{
-            console.log("Non siamo riusciti ad usare il refresh token!");
-            this.tokenService.signOut();
-          }
-        })
+        alert('Sessione scaduta.\nEffetua nuovamente il login!');
+        this.tokenService.signOut();
+        window.location.reload();
       }
     })
   }

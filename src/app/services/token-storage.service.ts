@@ -24,8 +24,32 @@ export class TokenStorageService {
     this.saveUser(decodedToken);
   }
 
-  public getToken():string|null{
-    return window.sessionStorage.getItem(TOKEN_KEY);
+  public getToken():Observable<string>{
+    return new Observable<string>(observable=>{
+      const token = window.sessionStorage.getItem(TOKEN_KEY);
+      const refreshToken = this.getRefreshToken();
+      if(token && TokenStorageService.isValid(token)){
+        observable.next(token);
+        observable.complete();
+      }else if(refreshToken && TokenStorageService.isValid(refreshToken)){
+        this.saveRefreshToken(null);  // se non facessi così entrerei in un loop (vedasi interceptor)
+        this.authService.refresh(refreshToken).subscribe({
+          next:data=>{
+            this.saveToken(data.access_token);
+            this.saveRefreshToken(data.refresh_token);
+            observable.next(data.access_token);
+            observable.complete();
+          },
+          error:err=>{
+            observable.next('');
+            observable.complete();
+          }
+        })
+      }else{
+        observable.next('');
+        observable.complete();
+      }
+    })
   }
 
   private saveUser(user:any):void{
@@ -40,9 +64,10 @@ export class TokenStorageService {
     return null;
   }
 
-  public saveRefreshToken(token:string):void{
+  public saveRefreshToken(token:string|null):void{
     window.sessionStorage.removeItem(REFRESH_TOKEN_KEY);
-    window.sessionStorage.setItem(REFRESH_TOKEN_KEY,token);
+    if(token)
+      window.sessionStorage.setItem(REFRESH_TOKEN_KEY,token);
   }
 
   private getRefreshToken():string|null{
@@ -52,18 +77,15 @@ export class TokenStorageService {
   public refreshToken():Observable<boolean>{
     return new Observable<boolean>((observer) => {
       const refreshToken = this.getRefreshToken();
-      console.log(refreshToken);
       if(refreshToken){
         this.authService.refresh(refreshToken).subscribe({
           next:data=>{
             this.saveToken(data.access_token);
             this.saveRefreshToken(data.refresh_token);
-            console.log("Token aggiornato!");
             observer.next(true);
             observer.complete();
           },
           error:err=>{
-            console.error("Errore durante la chiamata refresh:", err);
             observer.next(false);
             observer.complete();
           },
@@ -79,7 +101,6 @@ export class TokenStorageService {
     if(token == null) return false;
     const decodedToken = this.decodeToken(token);
     const currentTimestamp = Math.floor(Date.now() / 1000);
-    console.log(currentTimestamp);
     return currentTimestamp <= decodedToken.exp;
   }
 

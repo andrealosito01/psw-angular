@@ -13,7 +13,6 @@ export class AppComponent {
 
   ngOnInit(){
     const user = this.tokenService.getUser();
-    console.log(user);
     if(user){
       const roles = user.resource_access.myclient.roles;
       if(roles.includes('paziente'))

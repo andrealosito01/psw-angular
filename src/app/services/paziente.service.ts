@@ -20,7 +20,6 @@ export class PazienteService {
 
   public getPaziente(username:String):Observable<any>{
     const url = auth.PAZ_API + '/' + username;
-    console.log(url);
     return this.http.get(url);
   }
 
