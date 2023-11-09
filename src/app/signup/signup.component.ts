@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ConcreteUtente } from '../models/utente.model';
 
 @Component({
   selector: 'app-signup',
@@ -52,17 +53,17 @@ export class SignupComponent {
     if(!this.form.valid) return;
     if(this.missMatch) return;
 
-    const jsonData = {
-      username:this.form.value.myUsername,
-      email:this.form.value.myEmail,
-      nome:this.form.value.myNome,
-      cognome:this.form.value.myCognome,
-      dataDiNascita:this.form.value.myNascita,
-      altezza:this.form.value.myAltezza,
-      password:this.form.value.myPassword
-    }
+    const nuovoPaziente = new ConcreteUtente(
+      this.form.value.myUsername,
+      this.form.value.myPassword,
+      this.form.value.myEmail,
+      this.form.value.myNome,
+      this.form.value.myCognome,
+      this.form.value.myNascita,
+      this.form.value.myAltezza
+    );
 
-    this.authService.signup(jsonData).subscribe({
+    this.authService.signup(nuovoPaziente).subscribe({
       next:data=>{
         this.router.navigate(['/login'],{queryParams:{signed:'true'}});
       },
