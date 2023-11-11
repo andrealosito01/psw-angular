@@ -24,5 +24,6 @@ a.selected{
   flex-direction: column;
   border-left: 1px solid #bcbcbc;
   border-right: 1px solid #bcbcbc;
+  padding-top:20px
 }
 

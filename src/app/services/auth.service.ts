@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { auth } from 'config';
+import { Utente } from '../models/utente.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,14 +45,14 @@ export class AuthService {
     return this.http.post(auth.AUTH_API,body,httpOptions);
   }
 
-  public signup(user:any):Observable<any>{
+  public signup(user:Utente):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-    return this.http.post(auth.PAZ_API,user,httpOptions);
+    return this.http.post(auth.UTENTE_API,user,httpOptions);
   }
 
 }

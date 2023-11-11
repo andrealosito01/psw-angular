@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { auth } from 'config';
@@ -20,7 +20,7 @@ export class PazienteService {
   constructor(private http:HttpClient) { }
 
   public getPaziente(username:String):Observable<Utente>{
-    const url = auth.PAZ_API + '/' + username;
+    const url = auth.UTENTE_API + '/' + username;
     return this.http.get(url).pipe(
       map((data: any) => {
         const paziente = {
@@ -32,6 +32,7 @@ export class PazienteService {
           altezza: data.altezza,
           piano: data.piano,
           pesi:data.pesi,
+          passi:data.passi,
           misure:data.misure,
           alimenti:data.alimenti,
           diari: data.diari,

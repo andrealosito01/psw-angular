@@ -3,6 +3,10 @@ export const auth = {
   GRANT_TYPE: 'password',
   CLIENT_ID: 'myclient',
   CLIENT_SECRET: 'gogYIFn4vccriS9PZHLKbYFc0stFnlxH',
-  PAZ_API: 'http://localhost:8081/utente',
-  REFRESH_TOKEN: 'refresh_token'
+  REFRESH_TOKEN: 'refresh_token',
+  UTENTE_API: 'http://localhost:8081/utente',
+  PESO_API: 'http://localhost:8081/peso',
+  PASSI_API: 'http://localhost:8081/passi',
+  PIANO_API: 'http://localhost:8081/piano',
+  DIARIO_API: 'http://localhost:8081/diario'
 };
