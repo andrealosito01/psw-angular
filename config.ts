@@ -11,5 +11,6 @@ export const auth = {
   PIANO_API: 'http://localhost:8081/piano',
   DIARIO_API: 'http://localhost:8081/diario',
   ALIMENTO_API: 'http://localhost:8081/alimento',
-  VOCE_DIARIO_API: 'http://localhost:8081/voceDiario'
+  VOCE_DIARIO_API: 'http://localhost:8081/voceDiario',
+  SCHEDE_API: 'http://localhost:8081/scheda'
 };

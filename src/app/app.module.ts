@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon'
 import { MatSortModule } from '@angular/material/sort'
+import {MatExpansionModule} from '@angular/material/expansion'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -69,7 +70,8 @@ const authInterceptorProviders = [
     MatInputModule,
     MatNativeDateModule,
     MatIconModule,
-    MatSortModule
+    MatSortModule,
+    MatExpansionModule
   ],
   providers: [AuthService, TokenStorageService, authInterceptorProviders],
   bootstrap: [AppComponent]

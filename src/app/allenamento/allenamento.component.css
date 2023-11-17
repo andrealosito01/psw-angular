@@ -1,0 +1,19 @@
+.inattive{
+  color:#bcbcbc;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+  padding: 2%;
+  margin-top: 8px;
+}
+
+td,th{
+  border: 1px solid black;
+}
+
+mat-icon.attive{
+  color:green;
+}
+

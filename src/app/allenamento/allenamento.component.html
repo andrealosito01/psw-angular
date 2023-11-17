@@ -1,1 +1,66 @@
-<p>allenamento works!</p>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       <mat-icon class="attive" inline>horizontal_rule</mat-icon>&nbsp;Schede attive
+      </mat-panel-title>
+      <mat-panel-description>
+        Visualizza le tue schede di allenamento attive
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let scheda of schedeAttive">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon inline>article</mat-icon>&nbsp;{{scheda.nome}}
+          </mat-panel-title>
+          <mat-panel-description>{{scheda.descrizione}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel *ngFor="let esercizio of scheda.esercizi">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{esercizio.nome}}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p [innerHTML]="esercizio.descrizione"></p>
+          <table *ngIf="esercizio.serie.length > 0">
+            <tr>
+              <th>Numero serie</th><th>Ripetizioni</th><th>Carico</th><th>Duarata</th>
+            </tr>
+            <tr *ngFor="let serie of esercizio.serie">
+              <td>{{serie.numero}}</td><td>{{serie.ripetizioni}}</td><td>{{serie.carico}}</td>
+              <td *ngIf="serie.durata">{{serie.durata}}</td><td *ngIf="!serie.durata">-</td>
+            </tr>
+          </table>
+        </mat-expansion-panel>
+        <p *ngIf="scheda.esercizi.length == 0">Nessun esercizio da visualizzare</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p *ngIf="schedeAttive.length == 0">Nessuna scheda da visualizzare</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="inattive">
+        <mat-icon class="inattive" inline>horizontal_rule</mat-icon>&nbsp;Schede inattive
+      </mat-panel-title>
+      <mat-panel-description class="inattive">
+        Visualizza le tue schede di allenamento non attive
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let scheda of schedeInattive">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="inattive">
+            <mat-icon inline>article</mat-icon>&nbsp;{{scheda.nome}}
+          </mat-panel-title>
+          <mat-panel-description class="inattive">{{scheda.descrizione}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel *ngFor="let esercizio of scheda.esercizi" disabled>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="inattive">{{esercizio.nome}}</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <p *ngIf="scheda.esercizi.length == 0" class="inattive">Nessun esercizio da visualizzare</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p *ngIf="schedeInattive.length == 0" class="inattive">Nessuna scheda da visualizzare</p>
+  </mat-expansion-panel>
+</mat-accordion>
