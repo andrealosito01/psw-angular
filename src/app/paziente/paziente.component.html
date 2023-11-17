@@ -1,20 +1,17 @@
 <div class="grey-background">
-  <nav class="navbar navbar-expand-lg bg-dark">
+  <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><img class="logo" src="assets/img/logo.svg"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button (click)="isMenuCollapsed = !isMenuCollapsed" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon text-white"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link text-white" [ngClass]="selected=='dashboard'?'selected':''" routerLink="dashboard" (click)="change('dashboard')">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" [ngClass]="selected=='diario'?'selected':''" routerLink="diario" (click)="change('diario')">Diario</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" [ngClass]="selected=='piano'?'selected':''" routerLink="piano" (click)="change('piano')">Piano</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" [ngClass]="selected=='allenamento'?'selected':''" routerLink="allenamento" (click)="change('allenamento')">Allenamento</a>

@@ -4,8 +4,8 @@
       <div class="card text-center">
         <h5 class="card-header">Energia</h5>
         <div class="card-body">
-          <app-calorie-chart *ngIf="obiettivoEnergia" [valoreAttuale]="energia" [valoreFinale]="obiettivoEnergia"></app-calorie-chart>
-          <div *ngIf="!obiettivoEnergia" class="alert alert-light" role="alert">Chiedi al nutrizionista di assegnarti un piano!</div>
+          <app-calorie-chart *ngIf="pianoLoaded && obiettivoEnergia" [valoreAttuale]="energia" [valoreFinale]="obiettivoEnergia"></app-calorie-chart>
+          <div *ngIf="pianoLoaded && !obiettivoEnergia" class="alert alert-light" role="alert">Chiedi al nutrizionista di assegnarti un piano!</div>
         </div>
       </div>
     </div>
@@ -13,8 +13,8 @@
       <div class="card text-center">
         <h5 class="card-header">Macronutrienti</h5>
         <div class="card-body">
-          <app-macro-chart *ngIf="obiettivi" [valoriAttuali]="macroAttuali" [valoriFinali]="obiettivi"></app-macro-chart>
-          <div *ngIf="!obiettivi" class="alert alert-light" role="alert">Chiedi al nutrizionista di assegnarti un piano!</div>
+          <app-macro-chart *ngIf="pianoLoaded && obiettivi" [valoriAttuali]="macroAttuali" [valoriFinali]="obiettivi"></app-macro-chart>
+          <div *ngIf="pianoLoaded && !obiettivi" class="alert alert-light" role="alert">Chiedi al nutrizionista di assegnarti un piano!</div>
         </div>
       </div>
     </div>

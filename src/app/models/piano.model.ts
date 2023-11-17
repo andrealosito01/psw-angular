@@ -1,4 +1,5 @@
 export interface Piano{
+  id?:number,
   nome:string,
   energia:number,
   proteine:number,

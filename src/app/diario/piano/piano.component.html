@@ -1,0 +1,238 @@
+<div class="modal-header">
+  <h2 class="modal-title" id="modal-basic-title">{{piano.nome}}</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="chiudi.emit()"></button>
+</div>
+<div class="modal-body">
+  <table>
+    <tr>
+      <th class="right"></th>
+      <th class="right">Attuali</th>
+      <th class="right">Obiettivo</th>
+      <th class="right">Rimanenti</th>
+    </tr>
+    <tr>
+      <td>Energia</td>
+      <td class="right">{{totali.energia}}</td>
+      <td class="right">{{piano.energia}}</td>
+      <td class="right">{{piano.energia - totali.energia}}kcal</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="energia">
+          <div class="progress-bar" [ngStyle]="{ 'width.%': (totali.energia/piano.energia)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Proteine</td>
+      <td class="right">{{totali.proteine}}</td>
+      <td class="right">{{piano.proteine}}</td>
+      <td class="right">{{piano.proteine - totali.proteine}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="proteine">
+          <div class="progress-bar bg-danger" [ngStyle]="{ 'width.%': (totali.proteine/piano.proteine)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Carboidrati</td>
+      <td class="right">{{totali.carboidrati}}</td>
+      <td class="right">{{piano.carboidrati}}</td>
+      <td class="right">{{piano.carboidrati - totali.carboidrati}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="carboidrati">
+          <div class="progress-bar bg-danger" [ngStyle]="{ 'width.%': (totali.carboidrati/piano.carboidrati)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Fibre</td>
+      <td class="right">{{totali.fibre}}</td>
+      <td class="right">{{piano.fibre}}</td>
+      <td class="right">{{piano.fibre - totali.fibre}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="fibre">
+          <div class="progress-bar bg-dark" [ngStyle]="{ 'width.%': (totali.fibre/piano.fibre)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Zuccheri</td>
+      <td class="right">{{totali.zuccheri}}</td>
+      <td class="right">{{piano.zuccheri}}</td>
+      <td class="right">{{piano.zuccheri - totali.zuccheri}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="zuccheri">
+          <div class="progress-bar bg-dark" [ngStyle]="{ 'width.%': (totali.zuccheri/piano.zuccheri)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+    <tr>
+      <td>Grassi totali</td>
+      <td class="right">{{totali.grassiTotali}}</td>
+      <td class="right">{{piano.grassiTotali}}</td>
+      <td class="right">{{piano.grassiTotali - totali.grassiTotali}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="grassiTotali">
+          <div class="progress-bar bg-danger" [ngStyle]="{ 'width.%': (totali.grassiTotali/piano.grassiTotali)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Grassi saturi</td>
+      <td class="right">{{totali.grassiSaturi}}</td>
+      <td class="right">{{piano.grassiSaturi}}</td>
+      <td class="right">{{piano.grassiSaturi - totali.grassiSaturi}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="grassiSaturi">
+          <div class="progress-bar bg-dark" [ngStyle]="{ 'width.%': (totali.grassiSaturi/piano.grassiSaturi)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Grassi polinsaturi</td>
+      <td class="right">{{totali.grassiPolinsaturi}}</td>
+      <td class="right">{{piano.grassiPolinsaturi}}</td>
+      <td class="right">{{piano.grassiPolinsaturi - totali.grassiPolinsaturi}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="grassiPolinsaturi">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.grassiPolinsaturi/piano.grassiPolinsaturi)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Grassi monoinsaturi</td>
+      <td class="right">{{totali.grassiMonoinsaturi}}</td>
+      <td class="right">{{piano.grassiMonoinsaturi}}</td>
+      <td class="right">{{piano.grassiMonoinsaturi - totali.grassiMonoinsaturi}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="grassiMonoinsaturi">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.grassiMonoinsaturi/piano.grassiMonoinsaturi)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Grassi trans</td>
+      <td class="right">{{totali.grassiTrans}}</td>
+      <td class="right">{{piano.grassiTrans}}</td>
+      <td class="right">{{piano.grassiTrans - totali.grassiTrans}}g</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="grassiTrans">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.grassiTrans/piano.grassiTrans)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Colesterolo</td>
+      <td class="right">{{totali.colesterolo}}</td>
+      <td class="right">{{piano.colesterolo}}</td>
+      <td class="right">{{piano.colesterolo - totali.colesterolo}}mg</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="colesterolo">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.colesterolo/piano.colesterolo)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Sodio</td>
+      <td class="right">{{totali.sodio}}</td>
+      <td class="right">{{piano.sodio}}</td>
+      <td class="right">{{piano.sodio - totali.sodio}}mg</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="sodio">
+          <div class="progress-bar bg-dark" [ngStyle]="{ 'width.%': (totali.sodio/piano.sodio)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Potassio</td>
+      <td class="right">{{totali.potassio}}</td>
+      <td class="right">{{piano.potassio}}</td>
+      <td class="right">{{piano.potassio - totali.potassio}}mg</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="potassio">
+          <div class="progress-bar bg-dark" [ngStyle]="{ 'width.%': (totali.potassio/piano.potassio)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Vitamina A</td>
+      <td class="right">{{totali.vitaminaA}}</td>
+      <td class="right">{{piano.vitaminaA}}</td>
+      <td class="right">{{piano.vitaminaA - totali.vitaminaA}}%</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="vitaminaA">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.vitaminaA/piano.vitaminaA)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Vitamina C</td>
+      <td class="right">{{totali.vitaminaC}}</td>
+      <td class="right">{{piano.vitaminaC}}</td>
+      <td class="right">{{piano.vitaminaC - totali.vitaminaC}}%</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="vitaminaC">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.vitaminaC/piano.vitaminaC)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Calcio</td>
+      <td class="right">{{totali.calcio}}</td>
+      <td class="right">{{piano.calcio}}</td>
+      <td class="right">{{piano.calcio - totali.calcio}}%</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="calcio">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.calcio/piano.calcio)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Ferro</td>
+      <td class="right">{{totali.ferro}}</td>
+      <td class="right">{{piano.ferro}}</td>
+      <td class="right">{{piano.ferro - totali.ferro}}%</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="progress" role="progressbar" aria-label="ferro">
+          <div class="progress-bar bg-secondary" [ngStyle]="{ 'width.%': (totali.ferro/piano.ferro)*100 }"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+</div>

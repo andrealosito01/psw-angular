@@ -1,4 +1,5 @@
 export interface Passi{
+  id?:number,
   data:number,
   valore:number
 }

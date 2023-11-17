@@ -1,0 +1,49 @@
+div.pad{
+  padding:12px;
+}
+
+.desc{
+  font-size:smaller;
+}
+
+a{
+  color: #0a58ca !important;
+  text-decoration: none;
+}
+
+a.rem{
+  color:red !important;
+  text-decoration: underline;
+}
+
+p{
+  text-align: center;
+}
+
+button{
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+li:hover{
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+div.notFound{
+  color:red;
+}
+
+table{
+  width: 100%;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+td.valore{
+  text-align: right;
+}

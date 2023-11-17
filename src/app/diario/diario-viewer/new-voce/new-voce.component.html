@@ -1,0 +1,120 @@
+<!-- Template elenco diario -->
+<div class="row pad" (click)="open(voceModal)" *ngIf="voce">
+  <div class="col">
+    {{voce.nome}}
+    <div class="desc">
+      {{voce.descrizione}}, {{voce.quantita*100}}g
+      <a class="rem" (click)="chiediConfermaRimozione($event)">(Rimuovi)</a>
+    </div>
+  </div>
+  <div class="col d-flex justify-content-end align-items-center">
+    {{voce.energia}}
+  </div>
+</div>
+
+<div class="pad" *ngIf="!voce" (click)="open(voceModal)">
+  <a>+ Aggiungi voce</a>
+</div>
+
+
+<!-- Modal -->
+<ng-template #voceModal let-voceModal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Voce diario</h2>
+    <button type="button" class="btn-close" aria-label="Close" (click)="voceModal.dismiss()"></button>
+  </div>
+  <div class="modal-body" *ngIf="nuovaVoce">
+    <form *ngIf="form" [formGroup]="form" novalidate>
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input formControlName="myNome" type="text" class="form-control" id="nome">
+      </div>
+      <div class="mb-3">
+        <label for="descrizione" class="form-label">Descrizione</label>
+        <input formControlName="myDescrizione" type="text" class="form-control" id="descrizione">
+      </div>
+      <div class="mb-3">
+        <label for="porzione" class="form-label">Porzione</label>
+        <input formControlName="myPorzione" type="text" class="form-control" id="porzione">
+      </div>
+      <div class="mb-3">
+        <label for="quantita" class="form-label">Numero porzioni</label>
+        <input formControlName="myQuantita" type="number" class="form-control" id="quantita">
+      </div>
+      <div class="mb-3">
+        <label for="pasto">Pasto</label>
+        <select class="form-select" id="pasto" formControlName="myPasto">
+          <option [value]="'Colazione'">Colazione</option>
+          <option [value]="'Pranzo'">Pranzo</option>
+          <option [value]="'Cena'">Cena</option>
+          <option [value]="'Snack'">Snack</option>
+        </select>
+      </div>
+      <button *ngIf="!isNew" type="button" class="btn btn-warning w-100" (click)="voceModal.close('Modifica')" [ngClass]="!form.valid?'disabled':''">Modifica</button>
+      <button *ngIf="isNew" type="button" class="btn btn-success w-100" (click)="voceModal.close('Aggiungi')" [ngClass]="!form.valid?'disabled':''">Aggiungi</button>
+      <table>
+        <tr><td>Energia</td><td class="valore">{{nuovaVoce.energia}} kcal</td></tr>
+        <tr><td>Proteine</td><td class="valore">{{nuovaVoce.proteine}} g</td></tr>
+        <tr><td>Carboidrati</td><td class="valore">{{nuovaVoce.carboidrati}} g</td></tr>
+        <tr><td>Fibre</td><td class="valore">
+          <div *ngIf="nuovaVoce.fibre">{{nuovaVoce.fibre}} g</div><div *ngIf="!nuovaVoce.fibre">-</div>
+        </td></tr>
+        <tr><td>Zuccheri</td><td class="valore">
+          <div *ngIf="nuovaVoce.zuccheri">{{nuovaVoce.zuccheri}} g</div><div *ngIf="!nuovaVoce.zuccheri">-</div>
+        </td></tr>
+        <tr><td>Grassi totali</td><td class="valore">{{nuovaVoce.grassiTotali}} g</td></tr>
+        <tr><td>Grassi saturi</td><td class="valore">
+          <div *ngIf="nuovaVoce.grassiSaturi">{{nuovaVoce.grassiSaturi}} g</div><div *ngIf="!nuovaVoce.grassiSaturi">-</div>
+        </td></tr>
+        <tr><td>Grassi polinsaturi</td><td class="valore">
+          <div *ngIf="nuovaVoce.grassiPolinsaturi">{{nuovaVoce.grassiPolinsaturi}} g</div><div *ngIf="!nuovaVoce.grassiPolinsaturi">-</div>
+        </td></tr>
+        <tr><td>Grassi monoinsaturi</td><td class="valore">
+          <div *ngIf="nuovaVoce.grassiMonoinsaturi">{{nuovaVoce.grassiMonoinsaturi}} g</div><div *ngIf="!nuovaVoce.grassiMonoinsaturi">-</div>
+        </td></tr>
+        <tr><td>Grassi trans</td><td class="valore">
+          <div *ngIf="nuovaVoce.grassiTrans">{{nuovaVoce.grassiTrans}} g</div><div *ngIf="!nuovaVoce.grassiTrans">-</div>
+        </td></tr>
+        <tr><td>Colesterolo</td><td class="valore">
+          <div *ngIf="nuovaVoce.colesterolo">{{nuovaVoce.colesterolo}} mg</div><div *ngIf="!nuovaVoce.colesterolo">-</div>
+        </td></tr>
+        <tr><td>Sodio</td><td class="valore">
+          <div *ngIf="nuovaVoce.sodio">{{nuovaVoce.sodio}} mg</div><div *ngIf="!nuovaVoce.sodio">-</div>
+        </td></tr>
+        <tr><td>Potassio</td><td class="valore">
+          <div *ngIf="nuovaVoce.potassio">{{nuovaVoce.potassio}} mg</div><div *ngIf="!nuovaVoce.potassio">-</div>
+        </td></tr>
+        <tr><td>Vitamina A</td><td class="valore">
+          <div *ngIf="nuovaVoce.vitaminaA">{{nuovaVoce.vitaminaA}} &mu;g</div><div *ngIf="!nuovaVoce.vitaminaA">-</div>
+        </td></tr>
+        <tr><td>Vitamina C</td><td class="valore">
+          <div *ngIf="nuovaVoce.vitaminaC">{{nuovaVoce.vitaminaC}} mg</div><div *ngIf="!nuovaVoce.vitaminaC">-</div>
+        </td></tr>
+        <tr><td>Calcio</td><td class="valore">
+          <div *ngIf="nuovaVoce.calcio">{{nuovaVoce.calcio}} mg</div><div *ngIf="!nuovaVoce.calcio">-</div>
+        </td></tr>
+        <tr><td>Ferro</td><td class="valore">
+          <div *ngIf="nuovaVoce.ferro">{{nuovaVoce.ferro}} mg</div><div *ngIf="!nuovaVoce.ferro">-</div>
+        </td></tr>
+      </table>
+    </form>
+  </div>
+  <div class="modal-body" *ngIf="!nuovaVoce">
+    <form>
+      <h4>1. Cerca dal codice a barre</h4>
+      <input #barCode type="text" class="form-control">
+      <div *ngIf="alimentoNonTrovato" class="notFound">Alimento non trovato!</div>
+      <button type="button" class="btn btn-primary w-100" (click)="cercaAlimento(barCode.value)">Seleziona</button>
+    </form>
+    <p>Oppure</p>
+      <h4>2. Seleziona tra gli alimenti salvati</h4>
+      <ul>
+        <li *ngFor="let alimento of alimenti" (click)="seleziona(alimento)">
+          {{alimento.nome}}
+          <div class="desc">{{alimento.descrizione}}</div>
+        </li>
+      </ul>
+  </div>
+  <div class="modal-footer">
+  </div>
+</ng-template>

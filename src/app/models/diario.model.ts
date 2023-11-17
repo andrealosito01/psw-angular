@@ -1,6 +1,7 @@
 import { VoceDiario } from "./voce-diario.model";
 
 export interface Diario{
+  id?:number,
   giorno:number,
   acqua:number,
   vociDiario:VoceDiario[]

@@ -1,4 +1,5 @@
 export interface Serie{
+  id?:number,
   numero:number,
   ripetizioni:number,
   carico:number,

@@ -1,0 +1,20 @@
+table{
+  width:100%;
+  border:1px solid #d2d2d2;
+  margin-bottom: 28px;
+}
+
+th{
+  background-color: #9e2828;
+  color:white;
+  padding:12px;
+}
+
+tr.voce:hover{
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+td.energia{
+  text-align: right;
+}

@@ -6,6 +6,7 @@ import { Piano } from "./piano.model";
 import { Scheda } from "./scheda.model";
 
 export interface Utente{
+  id?:number,
   username:string,
   email:string,
   nome:string,

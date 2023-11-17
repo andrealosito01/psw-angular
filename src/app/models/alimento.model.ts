@@ -1,4 +1,5 @@
 export interface Alimento{
+  id?:number;
   nome:string,
   descrizione:string,
   energia:number,

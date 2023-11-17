@@ -1,12 +1,13 @@
 export interface Misura{
-  data:number;
-  braccioDx:number;
-  braccioSx:number;
-  torace:number;
-  vita:number;
-  fianchi:number;
-  gambaDx:number;
-  gambaSx:number;
+  id?:number,
+  data:number,
+  braccioDx:number,
+  braccioSx:number,
+  torace:number,
+  vita:number,
+  fianchi:number,
+  gambaDx:number,
+  gambaSx:number
 }
 
 export class ConcreteMisura implements Misura{

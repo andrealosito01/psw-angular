@@ -8,6 +8,8 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class PazienteComponent {
 
+  isMenuCollapsed:boolean = true;
+
   constructor(private tokenService:TokenStorageService){}
 
   selected = 'dashboard';

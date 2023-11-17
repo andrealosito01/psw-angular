@@ -1,1 +1,74 @@
-<p>diario works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xxl-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <div class="container">
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Seleziona una data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="selectedData" (dateChange)="onDateSelected()">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field><br/>
+            </div>
+            <a *ngIf="piano&&diario" (click)="open(pianoModal)"
+              class="row d-flex justify-content-center align-items-center">
+              Visualizza piano
+            </a>
+            <ng-template #pianoModal let-pianoModal>
+              <app-piano (chiudi)="pianoModal.dismiss()" [piano]="piano" [vociDiario]="diario.vociDiario"></app-piano>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-6">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <table matSort (matSortChange)="sortData($event)">
+            <tr>
+              <th mat-sort-header="name">Pasto</th>
+              <th mat-sort-header="calories">Calorie (kcal)</th>
+              <th mat-sort-header="fat">Grassi (g)</th>
+              <th mat-sort-header="carbs">Carboidrati (g)</th>
+              <th mat-sort-header="fibre">Fibre (g)</th>
+              <th mat-sort-header="protein">Proteine (g)</th>
+            </tr>
+            <tr *ngFor="let totali of sortedData">
+              <td>{{totali.pasto}}</td>
+              <td class="number">{{totali.calorie}}</td>
+              <td class="number">{{totali.grassi}}</td>
+              <td class="number">{{totali.carboidrati}}</td>
+              <td class="number">{{totali.fibre}}</td>
+              <td class="number">{{totali.proteine}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-3">
+      <div class="card">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <table class="acqua">
+            <tr>
+              <th>Acqua (L)</th>
+            </tr>
+            <tr *ngIf="diario">
+              <td>{{diario.acqua}} litri</td>
+            </tr>
+            <tr>
+              <td>
+                <form *ngIf="formAcqua" [formGroup]="formAcqua" (ngSubmit)="onSubmit()" class="d-flex">
+                  <input formControlName="myIncremento" type="number" class="form-control margin" id="incremento"><button type="submit" class="btn btn-primary ml-2" [ngClass]="formAcqua.valid&&abilitato?'':'disabled'">Aggiungi</button>
+                </form>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+      <app-diario-viewer *ngIf="diario" [diario]="diario" (voceAggiunta)="aggiungi($event)" (voceRimossa)="rimuovi($event)"></app-diario-viewer>
+</div>

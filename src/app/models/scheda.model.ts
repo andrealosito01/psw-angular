@@ -1,6 +1,7 @@
 import { Esercizio } from "./esercizio.model";
 
 export interface Scheda{
+  id?:number,
   nome:string,
   attiva:boolean,
   esercizi:Esercizio[]

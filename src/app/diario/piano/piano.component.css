@@ -1,0 +1,13 @@
+table{
+  width: 100%;
+}
+
+th,td.right{
+  text-align: right;
+  padding:1%
+}
+
+div.progress{
+  height: 7px;
+}
+

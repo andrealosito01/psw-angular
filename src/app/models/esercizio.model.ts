@@ -1,6 +1,7 @@
 import { Serie } from "./serie.model";
 
 export interface Esercizio{
+  id?:number,
   nome:string,
   descrizione:string,
   serie:Serie[]

@@ -1,4 +1,5 @@
 export interface Peso{
+  id?:number,
   data:number,
   valore:number
 }

@@ -26,6 +26,7 @@ export class DashboardComponent {
   obiettivoEnergia!:number;
   macroAttuali:number[] = [0,0,0,0];
   obiettivi!:number[];
+  pianoLoaded:boolean = false;
 
   constructor(private diarioService:DiarioService, private pianoService:PianoService,
     private pesoService:PesoService, private passiService:PassiService,private tokenService:TokenStorageService){}
@@ -42,9 +43,10 @@ export class DashboardComponent {
         // Prendo il piano dell'utente
         this.pianoService.getPiano().subscribe({
           next:data=>{
-            const piano:Piano = data;
-            if(piano){
-             this.caricaObiettivi(piano);
+              const piano:Piano = data;
+              if(piano){
+                this.caricaObiettivi(piano);
+              this.pianoLoaded = true;
             }
             // Prendo i pesi dell'utente
             this.pesoService.getPesi().subscribe({
@@ -80,14 +82,13 @@ export class DashboardComponent {
       },
       error:err=>{
         alert('Sessione scaduta.\nEffetua nuovamente il login!');
-                this.tokenService.signOut();
-                window.location.reload();
+        this.tokenService.signOut();
+        window.location.reload();
       }
     })
   }
 
   private calcolaTotale(vociDiario:VoceDiario[]):void{
-    console.log("prova");
     let totEnergia = 0;
     let totCarboidrati = 0;
     let totFibre = 0;

@@ -1,7 +1,9 @@
 export interface VoceDiario{
+  id?:number,
   quantita:number,
   pasto:string,
   nome:string,
+  descrizione:string,
   energia:number,
   proteine:number,
   carboidrati:number,
@@ -23,9 +25,11 @@ export interface VoceDiario{
 
 export class ConcreteVoceDiario implements VoceDiario{
 
+  public id?:number;
   public quantita:number;
   public pasto:string;
   public nome:string;
+  public descrizione:string;
   public energia:number;
   public proteine:number;
   public carboidrati:number;
@@ -44,13 +48,14 @@ export class ConcreteVoceDiario implements VoceDiario{
   public calcio:number;
   public ferro:number;
 
-  constructor (quantita:number, pasto:string, nome:string, energia:number, proteine:number, carboidrati:number,
-    fibre:number, zuccheri:number, grassiTotali:number, grassiSaturi:number, grassiPolinsaturi:number,
+  constructor (quantita:number, pasto:string, nome:string, descrizione:string, energia:number, proteine:number,
+    carboidrati:number, fibre:number, zuccheri:number, grassiTotali:number, grassiSaturi:number, grassiPolinsaturi:number,
     grassiMonoinsaturi:number, grassiTrans:number, colesterolo:number, sodio:number, potassio:number,
-    vitaminaA:number, vitaminaC:number, calcio:number, ferro:number){
+    vitaminaA:number, vitaminaC:number, calcio:number, ferro:number,id?:number){
       this.quantita = quantita;
       this.pasto = pasto;
       this.nome = nome;
+      this.descrizione = descrizione;
       this.energia = energia;
       this.proteine = proteine;
       this.carboidrati = carboidrati;
@@ -68,6 +73,7 @@ export class ConcreteVoceDiario implements VoceDiario{
       this.vitaminaC = vitaminaC;
       this.calcio = calcio;
       this.ferro = ferro;
+      this.id = id;
     }
 
 }

@@ -1,0 +1,60 @@
+<table>
+  <tr>
+    <th>Colazione</th>
+  </tr>
+  <tr class="voce" *ngFor="let voce of vociColazione; let num = index">
+    <td>
+      <app-new-voce [pasto]="'Colazione'" [voce]="voce" (voceModificata)="modifica($event,voce,num)" (voceRimossa)="rimuovi(voce,num)"></app-new-voce>
+    </td>
+  </tr>
+  <tr class="voce">
+    <td>
+      <app-new-voce (voceAggiunta)="aggiungi($event)" [pasto]="'Colazione'"></app-new-voce>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Pranzo</th>
+  </tr>
+  <tr class="voce" *ngFor="let voce of vociPranzo; let num = index">
+    <td>
+      <app-new-voce [pasto]="'Pranzo'" [voce]="voce"(voceModificata)="modifica($event,voce,num)" (voceRimossa)="rimuovi(voce,num)"></app-new-voce>
+    </td>
+  </tr>
+  <tr class="voce">
+    <td>
+      <app-new-voce (voceAggiunta)="aggiungi($event)" [pasto]="'Pranzo'"></app-new-voce>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Cena</th>
+  </tr>
+  <tr class="voce" *ngFor="let voce of vociCena; let num = index">
+    <td>
+      <app-new-voce [pasto]="'Cena'" [voce]="voce"(voceModificata)="modifica($event,voce,num)" (voceRimossa)="rimuovi(voce,num)"></app-new-voce>
+    </td>
+  </tr>
+  <tr class="voce">
+    <td>
+      <app-new-voce (voceAggiunta)="aggiungi($event)" [pasto]="'Cena'"></app-new-voce>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Snack</th>
+  </tr>
+  <tr class="voce" *ngFor="let voce of vociSnack; let num = index">
+    <td>
+      <app-new-voce [pasto]="'Snack'" [voce]="voce"(voceModificata)="modifica($event,voce,num)" (voceRimossa)="rimuovi(voce,num)"></app-new-voce>
+    </td>
+  </tr>
+  <tr class="voce">
+    <td>
+      <app-new-voce (voceAggiunta)="aggiungi($event)" [pasto]="'Snack'"></app-new-voce>
+    </td>
+  </tr>
+</table>
