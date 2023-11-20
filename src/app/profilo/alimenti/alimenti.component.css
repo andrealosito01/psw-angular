@@ -1,0 +1,20 @@
+.desc{
+  font-size:smaller;
+}
+
+table{
+  width: 100%;
+}
+
+tr:hover{
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+td{
+  width: 96%;
+}
+
+mat-icon{
+  color:red;
+}

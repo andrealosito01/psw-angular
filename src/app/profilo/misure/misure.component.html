@@ -1,0 +1,96 @@
+<div *ngIf="misure && misure.length > 0" class="body">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>Data</th>
+        <th>Braccio dx</th>
+        <th>Braccio sx</th>
+        <th>Torace</th>
+        <th>Vita</th>
+        <th>Fianchi</th>
+        <th>Gamba dx</th>
+        <th>Gamba sx</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let misura of misure">
+          <td>{{formattaData(misura.data)}}</td><td>{{misura.braccioDx}} cm</td><td>{{misura.braccioSx}} cm</td>
+          <td>{{misura.torace}} cm</td><td>{{misura.vita}} cm</td><td>{{misura.fianchi}} cm</td>
+          <td>{{misura.gambaDx}} cm</td><td>{{misura.gambaSx}} cm</td>
+          <td><mat-icon class="modifica" (click)="open(aggiungiModal,misura)">edit</mat-icon>
+          <mat-icon (click)="chiediConfermaRimozione(misura)">delete</mat-icon></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="isFirst?'disabled':''" (click)="getMisure(paginaAttuale-1)">
+      <a class="page-link">
+        <span>&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let pagina of pagine" [ngClass]="(pagina-1)==paginaAttuale?'active':''" (click)="getMisure(pagina-1)">
+      <a class="page-link">{{pagina}}</a>
+    </li>
+    <li class="page-item" [ngClass]="isLast?'disabled':''" (click)="getMisure(paginaAttuale+1)">
+      <a class="page-link">
+        <span>&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="misure && misure.length == 0" class="body">
+  Non hai ancora inserito delle misure!
+</div>
+<mat-action-row>
+  <button type="button" class="btn btn-success" (click)="open(aggiungiModal)">Aggiungi</button>
+</mat-action-row>
+
+<ng-template #aggiungiModal let-aggiungiModal>
+	<div class="modal-header">
+		<h2 class="modal-title" id="modal-basic-title">Nuova misura</h2>
+		<button type="button" class="btn-close" aria-label="Close" (click)="aggiungiModal.dismiss()"></button>
+	</div>
+	<div class="modal-body" *ngIf="form">
+    <form [formGroup]="form" novalidate>
+      <div class="mb-3">
+        <label for="data" class="form-label">Data</label>
+        <input type="date" formControlName="myData" class="form-control" id="data">
+      </div>
+      <div class="mb-3">
+        <label for="braccioDx" class="form-label">Braccio destro</label>
+        <input type="number" formControlName="myBraccioDx" class="form-control" id="braccioDx">
+      </div>
+      <div class="mb-3">
+        <label for="braccioSx" class="form-label">Braccio sinistro</label>
+        <input type="number" formControlName="myBraccioSx" class="form-control" id="braccioSx">
+      </div>
+      <div class="mb-3">
+        <label for="torace" class="form-label">Torace</label>
+        <input type="number" formControlName="myTorace" class="form-control" id="torace">
+      </div>
+      <div class="mb-3">
+        <label for="vita" class="form-label">Vita</label>
+        <input type="number" formControlName="myVita" class="form-control" id="vita">
+      </div>
+      <div class="mb-3">
+        <label for="fianchi" class="form-label">Fianchi</label>
+        <input type="number" formControlName="myFianchi" class="form-control" id="fianchi">
+      </div>
+      <div class="mb-3">
+        <label for="gambaDx" class="form-label">Gamba destra</label>
+        <input type="number" formControlName="myGambaDx" class="form-control" id="gambaDx">
+      </div>
+      <div class="mb-3">
+        <label for="gambaSx" class="form-label">Gamba sinistra</label>
+        <input type="number" formControlName="myGambaSx" class="form-control" id="gambaSx">
+      </div>
+      <button type="button" *ngIf="!idDaModificare" class="btn btn-success mb-3 w-100" [ngClass]="form.invalid?'disabled':''" (click)="aggiungiMisura()">Aggiungi</button>
+      <button type="button" *ngIf="idDaModificare" class="btn btn-warning mb-3 w-100" [ngClass]="form.invalid?'disabled':''" (click)="modificaMisura()">Modifica</button>
+      <div class="alert alert-danger" *ngIf="misuraGiaInserita">Misura già inserita per questo giorno!</div>
+    </form>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>
+
+

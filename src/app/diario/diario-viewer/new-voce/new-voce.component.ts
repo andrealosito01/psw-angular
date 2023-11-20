@@ -22,6 +22,7 @@ export class NewVoceComponent {
   @Output() voceModificata = new EventEmitter<any>();
 
   alimenti?:Alimento[];
+  alimentiNutrizionista?:Alimento[];
   nuovaVoce?:VoceDiario;
   form?:FormGroup;
   alimentoNonTrovato:boolean = false;
@@ -41,6 +42,16 @@ export class NewVoceComponent {
       this.alimentoService.getAlimenti().subscribe({
         next:data=>{
           this.alimenti = data;
+          this.alimentoService.getAlimentiNutrizionista().subscribe({
+            next:data=>{
+              this.alimentiNutrizionista = data;
+            },
+            error:err=>{
+              alert('Sessione scaduta.\nEffetua nuovamente il login!');
+              this.tokenService.signOut();
+              window.location.reload();
+            }
+          })
         },
         error:err=>{
           alert('Sessione scaduta.\nEffetua nuovamente il login!');
@@ -215,6 +226,10 @@ export class NewVoceComponent {
         this.alimentoNonTrovato = true;
       }
     })
+  }
+
+  arrotondaQuantita(quantita:number){
+    return parseFloat(quantita.toFixed(0));
   }
 
 }

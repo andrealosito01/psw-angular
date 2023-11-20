@@ -1,0 +1,109 @@
+<div class="body">
+  <table>
+    <tr *ngFor="let alimento of alimenti; let num = index" >
+      <td (click)="open(aggiungiModal,alimento,num)">
+        {{alimento.nome}}
+        <div class="desc">{{alimento.descrizione}}</div>
+      </td>
+      <td (click)="chiediConfermaRimozione(alimento,num)"><mat-icon>delete</mat-icon></td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="alimenti && alimenti.length == 0" class="body">
+  Non hai ancora inserito degli alimenti!
+</div>
+<mat-action-row>
+  <button type="button" class="btn btn-success" (click)="open(aggiungiModal)">Aggiungi</button>
+</mat-action-row>
+
+<ng-template #aggiungiModal let-aggiungiModal>
+	<div class="modal-header">
+		<h2 class="modal-title" id="modal-basic-title">Nuovo alimento</h2>
+		<button type="button" class="btn-close" aria-label="Close" (click)="aggiungiModal.dismiss()"></button>
+	</div>
+	<div class="modal-body" *ngIf="form">
+    <form [formGroup]="form" novalidate>
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" formControlName="myNome" class="form-control" id="nome">
+      </div>
+      <div class="mb-3">
+        <label for="descrizione" class="form-label">Descrizione</label>
+        <input type="text" formControlName="myDescrizione" class="form-control" id="descrizione">
+      </div>
+      <div class="mb-3">
+        <label for="energia" class="form-label">Energia</label>
+        <input type="number" formControlName="myEnergia" class="form-control" id="energia">
+      </div>
+      <div class="mb-3">
+        <label for="proteine" class="form-label">Proteine</label>
+        <input type="number" formControlName="myProteine" class="form-control" id="proteine">
+      </div>
+      <div class="mb-3">
+        <label for="carboidrati" class="form-label">Carboidrati</label>
+        <input type="number" formControlName="myCarboidrati" class="form-control" id="carboidrati">
+      </div>
+      <div class="mb-3">
+        <label for="fibre" class="form-label">Fibre</label>
+        <input type="number" formControlName="myFibre" class="form-control" id="fibre">
+      </div>
+      <div class="mb-3">
+        <label for="zuccheri" class="form-label">Zuccheri</label>
+        <input type="number" formControlName="myZuccheri" class="form-control" id="zuccheri">
+      </div>
+      <div class="mb-3">
+        <label for="grassiTotali" class="form-label">Grassi totali</label>
+        <input type="number" formControlName="myGrassiTotali" class="form-control" id="grassiTotali">
+      </div>
+      <div class="mb-3">
+        <label for="grassiSaturi" class="form-label">Grassi saturi</label>
+        <input type="number" formControlName="myGrassiSaturi" class="form-control" id="grassiSaturi">
+      </div>
+      <div class="mb-3">
+        <label for="grassiPolinsaturi" class="form-label">Grassi polinsaturi</label>
+        <input type="number" formControlName="myGrassiPolinsaturi" class="form-control" id="grassiPolinsaturi">
+      </div>
+      <div class="mb-3">
+        <label for="grassiMonoinsaturi" class="form-label">Grassi monoinsaturi</label>
+        <input type="number" formControlName="myGrassiMonoinsaturi" class="form-control" id="grassiMonoinsaturi">
+      </div>
+      <div class="mb-3">
+        <label for="grassiTrans" class="form-label">Grassi trans</label>
+        <input type="number" formControlName="myGrassiTrans" class="form-control" id="grassiTrans">
+      </div>
+      <div class="mb-3">
+        <label for="colesterolo" class="form-label">Colesterolo</label>
+        <input type="number" formControlName="myColesterolo" class="form-control" id="colesterolo">
+      </div>
+      <div class="mb-3">
+        <label for="sodio" class="form-label">Sodio</label>
+        <input type="number" formControlName="mySodio" class="form-control" id="sodio">
+      </div>
+      <div class="mb-3">
+        <label for="potassio" class="form-label">Potassio</label>
+        <input type="number" formControlName="myPotassio" class="form-control" id="potassio">
+      </div>
+      <div class="mb-3">
+        <label for="vitaminaA" class="form-label">Vitamina A</label>
+        <input type="number" formControlName="myVitaminaA" class="form-control" id="vitaminaA">
+      </div>
+      <div class="mb-3">
+        <label for="vitaminaC" class="form-label">Vitamina C</label>
+        <input type="number" formControlName="myVitaminaC" class="form-control" id="vitaminaC">
+      </div>
+      <div class="mb-3">
+        <label for="calcio" class="form-label">Calcio</label>
+        <input type="number" formControlName="myCalcio" class="form-control" id="calcio">
+      </div>
+      <div class="mb-3">
+        <label for="ferro" class="form-label">Ferro</label>
+        <input type="number" formControlName="myFerro" class="form-control" id="ferro">
+      </div>
+      <button type="button" *ngIf="!idDaModificare" class="btn btn-success mb-3 w-100" [ngClass]="form.invalid?'disabled':''" (click)="aggiungiAlimento()">Aggiungi</button>
+      <button type="button" *ngIf="idDaModificare" class="btn btn-warning mb-3 w-100" [ngClass]="form.invalid?'disabled':''" (click)="modificaAlimento()">Modifica</button>
+      <div class="alert alert-danger" *ngIf="alimentoGiaInserito">Eiste già un alimento con questo nome!</div>
+    </form>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>

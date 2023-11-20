@@ -12,5 +12,6 @@ export const auth = {
   DIARIO_API: 'http://localhost:8081/diario',
   ALIMENTO_API: 'http://localhost:8081/alimento',
   VOCE_DIARIO_API: 'http://localhost:8081/voceDiario',
-  SCHEDE_API: 'http://localhost:8081/scheda'
+  SCHEDE_API: 'http://localhost:8081/scheda',
+  MISURA_API: 'http://localhost:8081/misura'
 };

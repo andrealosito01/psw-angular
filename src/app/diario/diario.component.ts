@@ -1,8 +1,8 @@
+import { ConcreteDiario, Diario } from './../models/diario.model';
 import { DiarioService } from './../services/diario.service';
 import { Component, Input } from '@angular/core';
 import { PianoService } from '../services/piano.service';
 import { TokenStorageService } from '../services/token-storage.service';
-import { Diario } from '../models/diario.model';
 import { Sort } from '@angular/material/sort';
 import { Piano } from '../models/piano.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,12 +29,11 @@ export class DiarioComponent {
   totali!: totaliPerPasto[];
   sortedData!: totaliPerPasto[];
 
-  @Input() selectedData!:Date;
+  selectedData!:Date;
   diario!:Diario;
   piano!:Piano;
 
   formAcqua!:FormGroup;
-  abilitato:boolean = true;
 
 	constructor(private diarioService:DiarioService, private pianoService:PianoService,
     private tokenService:TokenStorageService, private modalService:NgbModal) { }
@@ -64,9 +63,25 @@ export class DiarioComponent {
         this.sortedData = this.totali.slice();
       },
       error:err=>{
-        alert('Sessione scaduta.\nEffetua nuovamente il login!');
-        this.tokenService.signOut();
-        window.location.reload();
+        if(err.status == 404){
+          const nuovoDiario = new ConcreteDiario(this.selectedData.getTime());
+          this.diarioService.addDiario(nuovoDiario).subscribe({
+            next:data=>{
+              this.diario = data;
+              this.inizializzaForm();
+              this.sortedData = this.totali.slice();
+            },
+            error:err=>{
+              alert('Sessione scaduta.\nEffetua nuovamente il login!');
+              this.tokenService.signOut();
+              window.location.reload();
+            }
+          })
+        }else{
+          alert('Sessione scaduta.\nEffetua nuovamente il login!');
+          this.tokenService.signOut();
+          window.location.reload();
+        }
       }
     })
   }
@@ -158,24 +173,26 @@ export class DiarioComponent {
   }
 
   onSubmit(){
-    const incremento = this.formAcqua.get('myIncremento')?.value;
-    if(incremento){
-      const copiaDiario = {...this.diario};
-      copiaDiario.acqua += incremento;
-      this.diarioService.updateDiario(copiaDiario).subscribe({
-        next:data=>{
-          this.abilitato = false;
-          this.diario = data;
-          setTimeout(() => {
-            this.abilitato = true;
-          }, 1000);
-        },
-        error:err=>{
-          alert('Sessione scaduta.\nEffetua nuovamente il login!');
-          this.tokenService.signOut();
-          window.location.reload();
-        }
-      })
+    if(this.diario.id){
+      const incremento = this.formAcqua.get('myIncremento')?.value;
+      console.log(incremento + this.diario.acqua);
+      if(incremento + this.diario.acqua >= 0){
+        const nuovoDiario = new ConcreteDiario(
+          this.selectedData.getTime(),
+          this.diario.acqua + incremento
+        )
+        this.diarioService.updateDiario(nuovoDiario,this.diario.id).subscribe({
+          next:data=>{
+            this.diario = data;
+            this.inizializzaForm();
+          },
+          error:err=>{
+            alert('Sessione scaduta.\nEffetua nuovamente il login!');
+            this.tokenService.signOut();
+            window.location.reload();
+          }
+        })
+      }
     }
   }
 

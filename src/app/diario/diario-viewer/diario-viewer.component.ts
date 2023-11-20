@@ -88,9 +88,50 @@ export class DiarioViewerComponent {
   }
 
   modifica(nuovaVoce:any,vecchiaVoce:VoceDiario,i:number):void{
-    // in questo modo NON andrò mai ad usare l'endpoint del back-end per la modifica
-    this.rimuovi(vecchiaVoce,i);
-    this.aggiungi(nuovaVoce)
+    if(this.diario.id && vecchiaVoce.id){
+      this.voceDiarioService.updateVoceDiario(this.diario.id,vecchiaVoce.id,nuovaVoce).subscribe({
+        next:data=>{
+          // uso queste due variabili per evitarmi l'innesto di switch
+          let pastoOrigine:VoceDiario[] = [];
+          let pastoDestinazione:VoceDiario[] = [];
+          switch(vecchiaVoce.pasto){
+            case "Colazione":
+              pastoOrigine = this.vociColazione;
+              break;
+            case "Pranzo":
+              pastoOrigine = this.vociPranzo;
+              break;
+            case "Cena":
+              pastoOrigine = this.vociCena;
+              break;
+            case "Snack":
+              pastoOrigine = this.vociSnack;
+              break;
+          }
+          switch(data.pasto){
+            case "Colazione":
+              pastoDestinazione = this.vociColazione;
+              break;
+            case "Pranzo":
+              pastoDestinazione = this.vociPranzo;
+              break;
+            case "Cena":
+              pastoDestinazione = this.vociCena;
+              break;
+            case "Snack":
+              pastoDestinazione = this.vociSnack;
+              break;
+          }
+          pastoOrigine.splice(i,1);
+          pastoDestinazione.push(data);
+          this.voceRimossa.emit(vecchiaVoce);
+          this.voceAggiunta.emit(data);
+        },
+        error:err=>{
+          console.log(err);
+        }
+      })
+    }
   }
 
   rimuovi(voce:VoceDiario,i:number):void{

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { format } from 'date-fns';
 import { PazienteService } from '../services/paziente.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Utente } from '../models/utente.model';
@@ -14,11 +13,10 @@ export class ProfiloComponent {
 
   paziente!:Utente;
 
-  constructor(private profiloService:PazienteService, private tokenService:TokenStorageService){}
+  constructor(private pazienteService:PazienteService, private tokenService:TokenStorageService){}
 
   ngOnInit(){
-    const username = this.tokenService.getUser().preferred_username;
-    this.profiloService.getPaziente(username).subscribe({
+    this.pazienteService.getPaziente().subscribe({
       next:data=>{
         this.paziente = data;
       },

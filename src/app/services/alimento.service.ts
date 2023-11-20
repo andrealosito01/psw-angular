@@ -28,6 +28,16 @@ export class AlimentoService {
     );
   }
 
+  public getAlimentiNutrizionista():Observable<Alimento[]>{
+    const url = auth.ALIMENTO_API + "/nutrizionista";
+    return this.httpClient.get(url).pipe(
+      map((data:any)=>{
+        const alimenti:Alimento[] = data;
+        return alimenti;
+      })
+    )
+  }
+
   public getAlimentoByBarCode(barCode:string):Observable<Alimento>{
     const url = auth.OPEN_FOOD_API + "/" + barCode + ".json";
     return this.httpClient.get(url).pipe(
@@ -115,6 +125,35 @@ export class AlimentoService {
         )
       })
     );
+  }
+
+  deleteAlimento(id:number):Observable<Alimento>{
+    const url = auth.ALIMENTO_API + "/" + id;
+    return this.httpClient.delete(url).pipe(
+      map((data:any)=>{
+        const alimento:Alimento = data;
+        return alimento;
+      })
+    )
+  }
+
+  addAlimento(alimento:Alimento):Observable<Alimento>{
+    return this.httpClient.post(auth.ALIMENTO_API,alimento,httpOptions).pipe(
+      map((data:any)=>{
+        const alimento:Alimento = data;
+        return alimento;
+      })
+    )
+  }
+
+  updateAlimento(id:number,alimento:Alimento):Observable<Alimento>{
+    const url = auth.ALIMENTO_API + "/" + id;
+    return this.httpClient.put(url,alimento,httpOptions).pipe(
+      map((data:any)=>{
+        const alimento:Alimento = data;
+        return alimento;
+      })
+    )
   }
 
 }

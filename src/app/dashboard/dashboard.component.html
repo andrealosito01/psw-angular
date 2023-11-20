@@ -23,14 +23,16 @@
   <div class="card text-center">
     <h5 class="card-header">Storico pesi</h5>
     <div class="card-body" *ngIf="valoriPesi && datePesi">
-      <app-line-chart [values]="valoriPesi" [name]='"Peso"' [labels]="datePesi"></app-line-chart>
+      <app-line-chart *ngIf="valoriPesi.length > 0 && datePesi.length > 0" [values]="valoriPesi" [name]='"Peso"' [labels]="datePesi"></app-line-chart>
+      <div *ngIf="valoriPesi.length == 0 || datePesi.length == 0" class="alert alert-light" role="alert">Non hai ancora inserito un peso!</div>
     </div>
   </div>
   <br />
   <div class="card text-center">
     <h5 class="card-header">Storico passi</h5>
     <div class="card-body" *ngIf="valoriPassi && datePassi">
-      <app-line-chart [values]="valoriPassi" [name]='"Passi"' [labels]="datePassi"></app-line-chart>
+      <app-line-chart *ngIf="valoriPassi.length > 0 && datePassi.length > 0" [values]="valoriPassi" [name]='"Passi"' [labels]="datePassi"></app-line-chart>
+      <div *ngIf="valoriPassi.length == 0 || datePassi.length == 0" class="alert alert-light" role="alert">Non hai ancora inserito dei passi!</div>
     </div>
   </div>
 </div>

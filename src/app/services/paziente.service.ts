@@ -19,9 +19,8 @@ export class PazienteService {
 
   constructor(private http:HttpClient) { }
 
-  public getPaziente(username:String):Observable<Utente>{
-    const url = auth.UTENTE_API + '/' + username;
-    return this.http.get(url).pipe(
+  public getPaziente():Observable<Utente>{
+    return this.http.get(auth.UTENTE_API).pipe(
       map((data: any) => {
         const paziente = {
           username:data.username,
@@ -41,6 +40,15 @@ export class PazienteService {
         return paziente;
       })
     );
+  }
+
+  public updatePaziente(utente:Utente):Observable<Utente>{
+    return this.http.put(auth.UTENTE_API,utente,httpOptions).pipe(
+      map((data:any)=>{
+        const utenteAggiornato = data;
+        return utenteAggiornato;
+      })
+    )
   }
 
 }

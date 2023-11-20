@@ -39,9 +39,17 @@ export class DiarioService {
     )
   }
 
-  public updateDiario(diario:Diario):Observable<Diario>{
-    const url = auth.DIARIO_API + "/" + diario.id;
-    diario.id = undefined;
+  public addDiario(diario:Diario):Observable<Diario>{
+    return this.http.post(auth.DIARIO_API,diario,httpOptions).pipe(
+      map((data:any)=>{
+        const nuovoDiario:Diario = data;
+        return nuovoDiario;
+      })
+    )
+  }
+
+  public updateDiario(diario:Diario,id:number):Observable<Diario>{
+    const url = auth.DIARIO_API + "/" + id;
     return this.http.put(url,diario,httpOptions).pipe(
       map((data:any)=>{
         const diario:Diario = data;

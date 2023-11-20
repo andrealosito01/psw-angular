@@ -1,0 +1,23 @@
+<div class="expansion-panel-body">
+  <form [formGroup]="formInfoPersonali" (ngSubmit)="onSubmit()" novalidate>
+    <label for="nome" class="form-label">Nome</label>
+    <input formControlName="myNome" type="text" class="form-control mb-3" [ngClass]="formInfoPersonali.get('myNome')?.invalid?'is-invalid':''" id="nome">
+    <div *ngIf="formInfoPersonali.get('myNome')?.invalid" class="invalid-feedback">
+      La lunghezza del nome dev'essere compresa tra i 1-16 caratteri.
+    </div>
+    <label for="cognome" class="form-label">Cognome</label>
+    <input formControlName="myCognome" type="text" class="form-control mb-3" [ngClass]="formInfoPersonali.get('myCognome')?.invalid?'is-invalid':''" id="cognome">
+    <div *ngIf="formInfoPersonali.get('myCognome')?.invalid" class="invalid-feedback">
+      La lunghezza del cognome dev'essere compresa tra i 1-16 caratteri.
+    </div>
+    <label for="nascita" class="form-label">Data di nascita</label>
+    <input formControlName="myNascita" type="date" class="form-control mb-3" [ngClass]="formInfoPersonali.get('myNascita')?.invalid?'is-invalid':''" id="nascita">
+    <div *ngIf="formInfoPersonali.get('myNascita')?.invalid" class="invalid-feedback">
+      Campo obbligatorio.
+    </div>
+    <label for="altezza" class="form-label">Altezza</label>
+    <input formControlName="myAltezza" type="number" class="form-control mb-3" [ngClass]="formInfoPersonali.get('myAltezza')?.invalid?'is-invalid':''" id="altezza">
+    <button type="submit" class="btn btn-success w-100" [ngClass]="formInfoPersonali.invalid?'disabled':''">Salva</button>
+  </form>
+  <div *ngIf="isInfoUpdateSuccessful" class="success">Modifica effettuata con successo!</div>
+</div>

@@ -1,2 +1,34 @@
-<p>profilo works!</p>
-<pre>{{paziente | json}}</pre>
+<h1 *ngIf="paziente">{{paziente.username}}</h1>
+<h3 *ngIf="paziente">({{paziente.email}})</h3>
+<mat-accordion *ngIf="paziente">
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Informazioni personali</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-info-personali [paziente]="paziente"></app-info-personali>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Pesi</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-pesi></app-pesi>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Passi</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-passi></app-passi>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Misure</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-misure></app-misure>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Alimenti</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-alimenti></app-alimenti>
+  </mat-expansion-panel>
+</mat-accordion>

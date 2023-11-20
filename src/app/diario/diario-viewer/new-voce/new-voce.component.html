@@ -3,7 +3,7 @@
   <div class="col">
     {{voce.nome}}
     <div class="desc">
-      {{voce.descrizione}}, {{voce.quantita*100}}g
+      {{voce.descrizione}}, {{arrotondaQuantita(voce.quantita*100)}}g
       <a class="rem" (click)="chiediConfermaRimozione($event)">(Rimuovi)</a>
     </div>
   </div>
@@ -106,10 +106,20 @@
       <div *ngIf="alimentoNonTrovato" class="notFound">Alimento non trovato!</div>
       <button type="button" class="btn btn-primary w-100" (click)="cercaAlimento(barCode.value)">Seleziona</button>
     </form>
-    <p>Oppure</p>
+    <br/><p>Oppure</p>
       <h4>2. Seleziona tra gli alimenti salvati</h4>
+      <div *ngIf="alimenti && alimenti.length == 0">Nessun alimento da visualizzare!</div>
       <ul>
         <li *ngFor="let alimento of alimenti" (click)="seleziona(alimento)">
+          {{alimento.nome}}
+          <div class="desc">{{alimento.descrizione}}</div>
+        </li>
+      </ul>
+    <br/><p>Oppure</p>
+      <h4>3. Seleziona tra gli alimenti del nutrizionista</h4>
+      <div *ngIf="alimentiNutrizionista && alimentiNutrizionista.length == 0">Nessun alimento da visualizzare!</div>
+      <ul>
+        <li *ngFor="let alimento of alimentiNutrizionista" (click)="seleziona(alimento)">
           {{alimento.nome}}
           <div class="desc">{{alimento.descrizione}}</div>
         </li>

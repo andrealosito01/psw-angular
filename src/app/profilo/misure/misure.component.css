@@ -1,0 +1,24 @@
+table{
+  text-align: center;
+}
+
+td,th{
+  padding:8px;
+  width:11%;
+}
+
+a{
+  cursor:pointer
+}
+
+mat-icon{
+  color:red
+}
+
+mat-icon.modifica{
+  color:rgb(255, 183, 0)
+}
+
+div.body{
+  margin-bottom: 8px;
+}

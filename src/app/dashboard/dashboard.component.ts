@@ -9,6 +9,7 @@ import { TokenStorageService } from "../services/token-storage.service";
 import { PassiService } from "../services/passi.service";
 import { Passi } from "../models/passi.model";
 import { Piano } from '../models/piano.model';
+import { ConcreteDiario } from '../models/diario.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,30 +35,30 @@ export class DashboardComponent {
   ngOnInit(){
     const oggi = new Date();
     oggi.setHours(0,0,0,0);
-    // Prendo il diario di oggi
-    this.diarioService.getDiario(oggi.getTime()).subscribe({
+
+    // Prendo i pesi dell'utente
+    this.pesoService.getPesi(0,7).subscribe({
       next:data=>{
-        const vociDiario:VoceDiario[] = data.vociDiario;
-        if(vociDiario.length > 0)
-          this.calcolaTotale(vociDiario);
-        // Prendo il piano dell'utente
-        this.pianoService.getPiano().subscribe({
+        const pesi:Peso[] = data.content;
+        this.caricaPesi(pesi);
+        // Prendo i passi dell'utente
+        this.passiService.getPassi(0,7).subscribe({
           next:data=>{
-              const piano:Piano = data;
-              if(piano){
-                this.caricaObiettivi(piano);
-              this.pianoLoaded = true;
-            }
-            // Prendo i pesi dell'utente
-            this.pesoService.getPesi().subscribe({
+            const passi:Passi[] = data.content;
+            this.caricaPassi(passi);
+            // Prendo il diario di oggi
+            this.diarioService.getDiario(oggi.getTime()).subscribe({
               next:data=>{
-                const pesi:Peso[] = data;
-                this.caricaPesi(pesi);
-                // Prendo i passi dell'utente
-                this.passiService.getPassi().subscribe({
+                const vociDiario:VoceDiario[] = data.vociDiario;
+                if(vociDiario.length > 0)
+                  this.calcolaTotale(vociDiario);
+                // Prendo il piano dell'utente
+                this.pianoService.getPiano().subscribe({
                   next:data=>{
-                    const passi:Passi[] = data;
-                    this.caricaPassi(passi);
+                    const piano:Piano = data;
+                    if(piano)
+                      this.caricaObiettivi(piano);
+                    this.pianoLoaded = true;
                   },
                   error:err=>{
                     alert('Sessione scaduta.\nEffetua nuovamente il login!');
@@ -67,9 +68,39 @@ export class DashboardComponent {
                 })
               },
               error:err=>{
-                alert('Sessione scaduta.\nEffetua nuovamente il login!');
-                this.tokenService.signOut();
-                window.location.reload();
+                if(err.status == 404){
+                  const nuovoDiario = new ConcreteDiario(oggi.getTime());
+                  this.diarioService.addDiario(nuovoDiario).subscribe({
+                    next:data=>{
+                      const vociDiario:VoceDiario[] = data.vociDiario;
+                      if(vociDiario.length > 0)
+                        this.calcolaTotale(vociDiario);
+                      // Prendo il piano dell'utente
+                      this.pianoService.getPiano().subscribe({
+                        next:data=>{
+                          const piano:Piano = data;
+                          if(piano)
+                            this.caricaObiettivi(piano);
+                          this.pianoLoaded = true;
+                        },
+                        error:err=>{
+                          alert('Sessione scaduta.\nEffetua nuovamente il login!');
+                          this.tokenService.signOut();
+                          window.location.reload();
+                        }
+                      })
+                    },
+                    error:err=>{
+                      alert('Sessione scaduta.\nEffetua nuovamente il login!');
+                      this.tokenService.signOut();
+                      window.location.reload();
+                    }
+                  })
+                }else{
+                  alert('Sessione scaduta.\nEffetua nuovamente il login!');
+                  this.tokenService.signOut();
+                  window.location.reload();
+                }
               }
             })
           },

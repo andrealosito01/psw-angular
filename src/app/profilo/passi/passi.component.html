@@ -1,0 +1,59 @@
+<div *ngIf="passi && passi.length > 0" class="body">
+  <table class="table">
+    <thead>
+      <th>Data</th>
+      <th>Valore</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of passi">
+        <td>{{formattaData(p.data)}}</td><td>{{p.valore}} passi</td>
+        <td><mat-icon (click)="chiediConfermaRimozione(p)">delete</mat-icon></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="isFirst?'disabled':''" (click)="getPassi(paginaAttuale-1)">
+      <a class="page-link">
+        <span>&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let pagina of pagine" [ngClass]="(pagina-1)==paginaAttuale?'active':''" (click)="getPassi(pagina-1)">
+      <a class="page-link">{{pagina}}</a>
+    </li>
+    <li class="page-item" [ngClass]="isLast?'disabled':''" (click)="getPassi(paginaAttuale+1)">
+      <a class="page-link">
+        <span>&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="passi && passi.length == 0" class="body">
+  Non hai ancora inserito dei passi!
+</div>
+<mat-action-row>
+  <button type="button" class="btn btn-success" (click)="open(aggiungiModal)">Aggiungi</button>
+</mat-action-row>
+
+<ng-template #aggiungiModal let-aggiungiModal>
+	<div class="modal-header">
+		<h2 class="modal-title" id="modal-basic-title">Nuovi passi</h2>
+		<button type="button" class="btn-close" aria-label="Close" (click)="aggiungiModal.dismiss()"></button>
+	</div>
+	<div class="modal-body" *ngIf="form">
+    <form [formGroup]="form" novalidate>
+      <div class="mb-3">
+        <label for="data" class="form-label">Data</label>
+        <input type="date" formControlName="myData" class="form-control" id="data">
+      </div>
+      <div class="mb-3">
+        <label for="valore" class="form-label">Valore</label>
+        <input type="number" formControlName="myValore" class="form-control" id="valore">
+      </div>
+      <button type="button" class="btn btn-success mb-3 w-100" [ngClass]="form.invalid?'disabled':''" (click)="aggiungiPassi()">Aggiungi</button>
+      <div class="alert alert-danger" *ngIf="passiGiaInseriti">Passi già inseriti per questo giorno!</div>
+    </form>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>
+

@@ -12,6 +12,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon'
 import { MatSortModule } from '@angular/material/sort'
 import {MatExpansionModule} from '@angular/material/expansion'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -24,15 +25,19 @@ import { PianoComponent } from './diario/piano/piano.component';
 import { AllenamentoComponent } from './allenamento/allenamento.component';
 import { ProfiloComponent } from './profilo/profilo.component';
 import { CalorieChartComponent } from './dashboard/calorie-chart/calorie-chart.component';
-
-import { AuthService } from './services/auth.service';
-import { TokenStorageService } from './services/token-storage.service';
-import { AuthInterceptor } from './helpers/auth.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MacroChartComponent } from './dashboard/macro-chart/macro-chart.component';
 import { LineChartComponent } from './dashboard/line-chart/line-chart.component';
 import { DiarioViewerComponent } from './diario/diario-viewer/diario-viewer.component';
 import { NewVoceComponent } from './diario/diario-viewer/new-voce/new-voce.component';
+import { AlimentiComponent } from './profilo/alimenti/alimenti.component';
+import { InfoPersonaliComponent } from './profilo/info-personali/info-personali.component';
+import { PassiComponent } from './profilo/passi/passi.component';
+import { PesiComponent } from './profilo/pesi/pesi.component';
+import { MisureComponent } from './profilo/misure/misure.component';
+
+import { AuthService } from './services/auth.service';
+import { TokenStorageService } from './services/token-storage.service';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 const authInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -54,7 +59,12 @@ const authInterceptorProviders = [
     MacroChartComponent,
     LineChartComponent,
     DiarioViewerComponent,
-    NewVoceComponent
+    NewVoceComponent,
+    AlimentiComponent,
+    InfoPersonaliComponent,
+    PassiComponent,
+    PesiComponent,
+    MisureComponent
   ],
   imports: [
     BrowserModule,

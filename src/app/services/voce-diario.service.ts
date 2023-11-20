@@ -38,4 +38,14 @@ export class VoceDiarioService {
     )
   }
 
+  public updateVoceDiario(idDiario:number,idVoce:number,voce:VoceDiario):Observable<VoceDiario>{
+    const url = auth.VOCE_DIARIO_API + "/" + idDiario + "/" + idVoce;
+    return this.http.put(url,voce,httpOptions).pipe(
+      map((data:any)=>{
+        const voceModificata:VoceDiario = data;
+        return voceModificata;
+      })
+    )
+  }
+
 }

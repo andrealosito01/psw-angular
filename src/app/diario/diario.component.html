@@ -61,7 +61,7 @@
             <tr>
               <td>
                 <form *ngIf="formAcqua" [formGroup]="formAcqua" (ngSubmit)="onSubmit()" class="d-flex">
-                  <input formControlName="myIncremento" type="number" class="form-control margin" id="incremento"><button type="submit" class="btn btn-primary ml-2" [ngClass]="formAcqua.valid&&abilitato?'':'disabled'">Aggiungi</button>
+                  <input formControlName="myIncremento" type="number" class="form-control margin" id="incremento"><button type="submit" class="btn btn-primary ml-2" [ngClass]="formAcqua.valid?'':'disabled'">Aggiungi</button>
                 </form>
               </td>
             </tr>
